@@ -18,6 +18,34 @@ class ProductsOveriewScreen extends StatefulWidget {
 
 class _ProductsOveriewScreenState extends State<ProductsOveriewScreen> {
   var _showOnlyFavourites = false;
+  var _isInit = true;
+  var _isLoading = false;
+
+  @override
+  void initState() {
+    // Provider.of<Products>(context).fetchAndSetProducts();
+    /* Future.delayed(Duration.zero).then((_) {
+      Provider.of<Products>(context).fetchAndSetProducts();
+    });*/
+
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    if (_isInit) {
+      setState(() {
+        _isLoading = true;
+      });
+      Provider.of<Products>(context).fetchAndSetProducts().then((_) {
+        setState(() {
+          _isLoading = false;
+        });
+      });
+    }
+    _isInit = false;
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,9 +75,8 @@ class _ProductsOveriewScreenState extends State<ProductsOveriewScreen> {
             ],
           ),
           Consumer<Cart>(
-            builder: (_, cartData, ch) => Badge(
-                value: cartData.itemCount.toString(),
-                child: ch!),
+            builder: (_, cartData, ch) =>
+                Badge(value: cartData.itemCount.toString(), child: ch!),
             child: IconButton(
               onPressed: () {
                 Navigator.of(context).pushNamed(CartScreen.routeName);
@@ -60,7 +87,11 @@ class _ProductsOveriewScreenState extends State<ProductsOveriewScreen> {
         ],
       ),
       drawer: AppDrawer(),
-      body: new ProductsGridView(_showOnlyFavourites),
+      body: _isLoading
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : ProductsGridView(_showOnlyFavourites),
     );
   }
 }

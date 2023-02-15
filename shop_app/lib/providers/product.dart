@@ -24,15 +24,16 @@ class Product with ChangeNotifier {
     notifyListeners();
   }
 
-  void toggleFavoriteStatus() async {
+  void toggleFavoriteStatus(String? authToken, String userId) async {
     final oldStatus = isFavourite;
     isFavourite = !isFavourite;
     notifyListeners();
     final url = Uri.parse(
-        'https://flutterpracticeshopapp-default-rtdb.firebaseio.com/products/$id.json');
+        'https://flutterpracticeshopapp-default-rtdb.firebaseio.com/userFavorites/$userId/$id.json?auth=$authToken');
     try {
-      final response = await http.patch(url,
-          body: json.encode({'isFavourite': isFavourite}));
+      final response = await http.put(url, body: json.encode(isFavourite));
+      /* await http.patch(url,
+          body: json.encode({'isFavourite': isFavourite}));*/
       if (response.statusCode >= 400) {
         _setFavourite(oldStatus);
       }

@@ -46,7 +46,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
             );
           } else {
             if (dataSnapshot.error != null) {
-              return const Center(
+              return Center(
                 child: Text('An error occurred'),
               );
             } else {

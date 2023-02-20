@@ -20,22 +20,32 @@ class PlacesListScreen extends StatelessWidget {
         ],
       ),
       body: Center(
-        child: Consumer<GreatPlaces>(
-          child: Center(
-            child: Text('Got no places yet, start adding some!'),
-          ),
-          builder: (ctx, greatPlaces, ch) => greatPlaces.items.length <= 0
-              ? ch as Widget
-              : ListView.builder(
-                  itemBuilder: (ctx, index) => ListTile(
-                    leading: CircleAvatar(
-                      backgroundImage:
-                          FileImage(greatPlaces.items[index].image),
-                    ),
-                    title: Text(greatPlaces.items[index].title),
-                    onTap: () {},
+        child: FutureBuilder(
+          future: Provider.of<GreatPlaces>(context, listen: false)
+              .fetchAndSetPlaces(),
+          builder: (ctx, snapshot) => snapshot.connectionState ==
+                  ConnectionState.waiting
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Consumer<GreatPlaces>(
+                  child: Center(
+                    child: Text('Got no places yet, start adding some!'),
                   ),
-                  itemCount: greatPlaces.items.length,
+                  builder: (ctx, greatPlaces, ch) =>
+                      greatPlaces.items.length <= 0
+                          ? ch as Widget
+                          : ListView.builder(
+                              itemBuilder: (ctx, index) => ListTile(
+                                leading: CircleAvatar(
+                                  backgroundImage:
+                                      FileImage(greatPlaces.items[index].image),
+                                ),
+                                title: Text(greatPlaces.items[index].title),
+                                onTap: () {},
+                              ),
+                              itemCount: greatPlaces.items.length,
+                            ),
                 ),
         ),
       ),

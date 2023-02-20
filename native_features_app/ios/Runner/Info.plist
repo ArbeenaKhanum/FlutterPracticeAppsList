@@ -28,6 +28,12 @@
 	<string>We need to allow camera for pictures!</string>
 	<key>NSCameraUsageDescription</key>
     <string>We need to allow camera for pictures!</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>We need your location!</string>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>We need your location!</string>
+    <key>io.flutter.embedded_views_preview</key>
+    <true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

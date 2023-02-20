@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:native_features_app/providers/great_places.dart';
 import 'package:native_features_app/widgets/image_input.dart';
+import 'package:native_features_app/widgets/location_input.dart';
 import 'package:provider/provider.dart';
 
 class AddPlacesScreen extends StatefulWidget {
@@ -15,10 +16,12 @@ class AddPlacesScreen extends StatefulWidget {
 
 class _AddPlacesScreenState extends State<AddPlacesScreen> {
   final _titleController = TextEditingController();
-
-  File? _pickedImage;
+   File? _pickedImage;
 
   void _selectImage(File pickedImage) {
+    if (_pickedImage == null) {
+      return;
+    }
     _pickedImage = pickedImage;
   }
 
@@ -55,6 +58,8 @@ class _AddPlacesScreenState extends State<AddPlacesScreen> {
                       height: 10,
                     ),
                     ImageInput(_selectImage),
+                    SizedBox(height: 10,),
+                    LocationInput(),
                   ],
                 ),
               ),

@@ -50,25 +50,25 @@ class _ImageInputState extends State<ImageInput> {
           height: 100,
           decoration:
               BoxDecoration(border: Border.all(width: 1, color: Colors.grey)),
+          alignment: Alignment.center,
           child: _storedImage != null
               ? Image.file(
                   _storedImage!,
                   fit: BoxFit.cover,
                   width: double.infinity,
                 )
-              : Text(
+              : const Text(
                   'No image selected',
                   textAlign: TextAlign.center,
                 ),
-          alignment: Alignment.center,
         ),
-        SizedBox(
+        const SizedBox(
           width: 10,
         ),
         Expanded(
           child: TextButton.icon(
             onPressed: _takePicture,
-            icon: Icon(Icons.camera),
+            icon: const Icon(Icons.camera),
             label: Text(
               'Select Picture',
               style: TextStyle(color: Theme.of(context).colorScheme.primary),

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:native_features_app/models/place.dart';
 import 'package:native_features_app/providers/great_places.dart';
 import 'package:native_features_app/widgets/image_input.dart';
 import 'package:native_features_app/widgets/location_input.dart';
@@ -16,7 +17,8 @@ class AddPlacesScreen extends StatefulWidget {
 
 class _AddPlacesScreenState extends State<AddPlacesScreen> {
   final _titleController = TextEditingController();
-   File? _pickedImage;
+  File? _pickedImage;
+  PlaceLocation _pickedLocation = PlaceLocation(latitude: 12.9985, longitude: 77.5921);
 
   void _selectImage(File pickedImage) {
     if (_pickedImage == null) {
@@ -25,12 +27,18 @@ class _AddPlacesScreenState extends State<AddPlacesScreen> {
     _pickedImage = pickedImage;
   }
 
+  void _selectPlace(double lat, double lng) {
+    _pickedLocation = PlaceLocation(latitude: lat, longitude: lng);
+  }
+
   void _savePlace() {
-    if (_titleController.text.isEmpty || _pickedImage == null) {
+    if (_titleController.text.isEmpty ||
+        _pickedImage == null ||
+        _pickedLocation == null) {
       return;
     }
     Provider.of<GreatPlaces>(context, listen: false)
-        .addPlace(_titleController.text, _pickedImage!);
+        .addPlace(_titleController.text, _pickedImage!, _pickedLocation);
     Navigator.of(context).pop();
   }
 
@@ -58,8 +66,10 @@ class _AddPlacesScreenState extends State<AddPlacesScreen> {
                       height: 10,
                     ),
                     ImageInput(_selectImage),
-                    SizedBox(height: 10,),
-                    LocationInput(),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    LocationInput(_selectPlace),
                   ],
                 ),
               ),

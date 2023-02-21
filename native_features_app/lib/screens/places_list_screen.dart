@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:native_features_app/providers/great_places.dart';
 import 'package:native_features_app/screens/add_places_screen.dart';
-import 'package:native_features_app/screens/places_detail_screen.dart';
 import 'package:provider/provider.dart';
 
 class PlacesListScreen extends StatelessWidget {
@@ -33,26 +32,20 @@ class PlacesListScreen extends StatelessWidget {
                   child: Center(
                     child: Text('Got no places yet, start adding some!'),
                   ),
-                  builder: (ctx, greatPlaces, ch) => greatPlaces.items.length <=
-                          0
-                      ? ch as Widget
-                      : ListView.builder(
-                          itemBuilder: (ctx, index) => ListTile(
-                            leading: CircleAvatar(
-                              backgroundImage:
-                                  FileImage(greatPlaces.items[index].image),
+                  builder: (ctx, greatPlaces, ch) =>
+                      greatPlaces.items.length <= 0
+                          ? ch as Widget
+                          : ListView.builder(
+                              itemBuilder: (ctx, index) => ListTile(
+                                leading: CircleAvatar(
+                                  backgroundImage:
+                                      FileImage(greatPlaces.items[index].image),
+                                ),
+                                title: Text(greatPlaces.items[index].title),
+                                onTap: () {},
+                              ),
+                              itemCount: greatPlaces.items.length,
                             ),
-                            title: Text(greatPlaces.items[index].title),
-                            subtitle:
-                                Text(greatPlaces.items[index].location.address),
-                            onTap: () {
-                              Navigator.of(context).pushNamed(
-                                  PlacesDetailScreen.routeName,
-                                  arguments: greatPlaces.items[index].id);
-                            },
-                          ),
-                          itemCount: greatPlaces.items.length,
-                        ),
                 ),
         ),
       ),

@@ -5,9 +5,7 @@ class ChatScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Chat Screen'),
-      ),
+      appBar: AppBar(title: const Text('Chat Screen'),),
       body: ListView.builder(
         itemBuilder: (ctx, index) => Container(
           padding: const EdgeInsets.all(8),

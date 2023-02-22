@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "112305654974",
+    "project_id": "flutteronlinechat-96e57",
+    "storage_bucket": "flutteronlinechat-96e57.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:112305654974:android:d160ca82f7025502d362ef",
+        "android_client_info": {
+          "package_name": "com.example.online_chat_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "112305654974-i2n3iacjm5amap5qqa1q7uvatev9v776.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUU6ejei8PU9ou0EGXDuwc3YohlJo5_wM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "112305654974-i2n3iacjm5amap5qqa1q7uvatev9v776.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

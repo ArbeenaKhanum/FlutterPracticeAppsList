@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:online_chat_app/screens/auth_screen.dart';
 import 'package:online_chat_app/screens/chat_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const MyApp());
@@ -16,9 +17,17 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Online Chat',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        backgroundColor: Colors.pink,
+       primarySwatch: Colors.pink,
+        accentColor: Colors.deepPurple,
+        buttonTheme: ButtonThemeData(
+        buttonColor: Colors.pink,
+        textTheme: ButtonTextTheme.primary,
+        shape:
+        RoundedRectangleBorder(borderRadius: BorderRadius.circular(20),
+        ),),
       ),
-      home: ChatScreen(),
+      home: AuthScreen(),
     );
   }
 }

@@ -18,14 +18,15 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Online Chat',
       theme: ThemeData(
         backgroundColor: Colors.pink,
-       primarySwatch: Colors.pink,
+        primarySwatch: Colors.pink,
         accentColor: Colors.deepPurple,
         buttonTheme: ButtonThemeData(
-        buttonColor: Colors.pink,
-        textTheme: ButtonTextTheme.primary,
-        shape:
-        RoundedRectangleBorder(borderRadius: BorderRadius.circular(20),
-        ),),
+          buttonColor: Colors.pink,
+          textTheme: ButtonTextTheme.primary,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+        ),
       ),
       home: AuthScreen(),
     );

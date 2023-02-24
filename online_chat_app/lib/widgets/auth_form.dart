@@ -2,6 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AuthForm extends StatefulWidget {
+  AuthForm(this.submitFn);
+
+  late final void Function(String email, String password, String userName,
+      bool isLogin, BuildContext ctx) submitFn;
+
   @override
   State<AuthForm> createState() => _AuthFormState();
 }
@@ -19,6 +24,14 @@ class _AuthFormState extends State<AuthForm> {
 
     if (isValid) {
       _formKey.currentState!.save();
+      widget.submitFn(
+        _userEmail.trim(),
+        _userPassword.trim(),
+        _userName.trim(),
+        _isLogin,
+        context
+      );
+
       print(_userEmail);
       print(_userName);
       print(_userPassword);
@@ -39,7 +52,7 @@ class _AuthFormState extends State<AuthForm> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   TextFormField(
-                    key: ValueKey('user_email'),
+                    key: ValueKey('useremail'),
                     validator: (value) {
                       if (value!.isEmpty || !value.contains('@')) {
                         return 'Please enter a valid email address';
@@ -52,8 +65,9 @@ class _AuthFormState extends State<AuthForm> {
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(labelText: 'Email Address'),
                   ),
-                  TextFormField(
-                      key: ValueKey('user_name'),
+                  if (!_isLogin)
+                    TextFormField(
+                      key: ValueKey('username'),
                       validator: (value) {
                         if (value!.isEmpty || value.length < 4) {
                           return 'Please enter at least 4 characters';
@@ -64,9 +78,8 @@ class _AuthFormState extends State<AuthForm> {
                         _userName = value!;
                       },
                       decoration: InputDecoration(labelText: 'Username')),
-                  if (!_isLogin)
                     TextFormField(
-                      key: ValueKey('user_password'),
+                      key: ValueKey('userpassword'),
                       validator: (value) {
                         if (value!.isEmpty || value.length < 8) {
                           return 'Password must be at least 8 characters long';
